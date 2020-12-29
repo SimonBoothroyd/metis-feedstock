@@ -17,3 +17,16 @@ index 4f62184..85ba9b9 100644
  # METIS' custom options
  #option(IDX64 "enable 64 bit ints" OFF)
  #option(REAL64 "enable 64 bit floats (i.e., double)" OFF)
+diff --git a/Makefile b/Makefile
+index 30a0d65..65b9663 100644
+--- a/Makefile
++++ b/Makefile
+@@ -68,8 +68,6 @@ PKGNAME=metis-$(VERNUM)
+ define run-config
+ mkdir -p $(BUILDDIR)
+ mkdir -p $(BUILDDIR)/xinclude
+-echo $(IDXWIDTH) > $(BUILDDIR)/xinclude/metis.h
+-echo $(REALWIDTH) >> $(BUILDDIR)/xinclude/metis.h
+ cat include/metis.h >> $(BUILDDIR)/xinclude/metis.h
+ cp include/CMakeLists.txt $(BUILDDIR)/xinclude
+ cd $(BUILDDIR) && cmake $(CURDIR) $(CONFIG_FLAGS)
