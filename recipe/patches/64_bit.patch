@@ -1,0 +1,19 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 4f62184..85ba9b9 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -19,6 +19,14 @@ endif(SHARED)
+ 
+ include(${GKLIB_PATH}/GKlibSystem.cmake)
+ 
++if(MSVC)
++  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /DIDXTYPEWIDTH=64 /DREALTYPEWIDTH=32")
++  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /DIDXTYPEWIDTH=64 /DREALTYPEWIDTH=32")
++else(MSVC)
++  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DIDXTYPEWIDTH=64 -DREALTYPEWIDTH=32")
++  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DIDXTYPEWIDTH=64 -DREALTYPEWIDTH=32")
++endif(MSVC)
++
+ # METIS' custom options
+ #option(IDX64 "enable 64 bit ints" OFF)
+ #option(REAL64 "enable 64 bit floats (i.e., double)" OFF)

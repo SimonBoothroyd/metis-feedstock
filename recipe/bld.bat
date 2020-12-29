@@ -1,5 +1,13 @@
 MKDIR build\windows
+MKDIR build\xinclude
+
+COPY include\metis.h build\xinclude
+COPY include\CMakeLists.txt build\xinclude
+
 CD build\windows
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /DIDXTYPEWIDTH=64 /DREALTYPEWIDTH=32")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /DIDXTYPEWIDTH=64 /DREALTYPEWIDTH=32")
 
 cmake ^
     -G "NMake Makefiles"                     ^
