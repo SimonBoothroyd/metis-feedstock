@@ -1,0 +1,12 @@
+diff --git a/libmetis/CMakeLists.txt b/libmetis/CMakeLists.txt
+index fc6cec6..72c7c49 100644
+--- a/libmetis/CMakeLists.txt
++++ b/libmetis/CMakeLists.txt
+@@ -6,6 +6,7 @@ file(GLOB metis_sources *.c)
+ 
+ # Build libmetis.
+ add_library(metis ${METIS_LIBRARY_TYPE} ${metis_sources})
++target_link_libraries(metis GKlib)
+ 
+ if(METIS_INSTALL)
+   install(TARGETS metis
