@@ -1,35 +1,18 @@
 {% set name = "metis" %}
-{% set version = "5.1.1" %}
+{% set version = "5.1.2" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  - url: https://github.com/KarypisLab/METIS/archive/v{{ version }}-DistDGL-v0.5.tar.gz
-    sha256: cedf0b32d32a8496bac7eb078b2b8260fb00ddb8d50c27e4082968a01bc33331
+  - git_url: https://github.com/KarypisLab/METIS.git
+    git_rev: 96ae6e7f44cf849b89794dc2f48757acf4859353
     patches:
-      - patches/memory_patch.patch
       - patches/64_bit.patch
-  - url: https://github.com/KarypisLab/GKlib/archive/3eabb216ac97e11ce7e7a9b90f4c90778d9e7c18.zip
-    sha256: e75693a69957445171843a767430db7270de57fa431a415cc3f8e9ed472700e3
-    folder: GKlib
-
-# While Metis is a pure C library, it is built with cmake, which assumes C++
-# by defaults and attempts to locate the C++ compiler. Hence the recipe has a
-# build dependency on {{ compiler('cxx') }}. The `ignore_run_exports` entry is
-# added so that the package does not depend on the C++ runtime due to the
-# dependency to the C++ compiler.
-#
-# Another fix to this would be to have metis' cmake specify `project(METIS C)`
-# instead of `project(METIS)`.
 
 build:
   number: 1000
-  binary_relocation: true
-  ignore_run_exports:        # Cf comment above
-    - libstdcxx-ng           # [linux]
-    - libcxx                 # [osx]
   run_exports:
     - {{ pin_subpackage('metis', max_pin='x.x') }}
 
@@ -38,7 +21,9 @@ requirements:
     - cmake
     - make
     - {{ compiler('c') }}
-    - {{ compiler('cxx') }}  # Cf comment above
+    - gklib
+  run:
+    - gklib
 
 test:
   commands:
