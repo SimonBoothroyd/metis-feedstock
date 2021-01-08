@@ -8,8 +8,8 @@ package:
 source:
   - git_url: https://github.com/KarypisLab/METIS.git
     git_rev: 96ae6e7f44cf849b89794dc2f48757acf4859353
-    patches:
-      - patches/64_bit.patch
+#    patches:
+#      - patches/64_bit.patch
 
 build:
   number: 1000
