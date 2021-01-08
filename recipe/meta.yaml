@@ -21,6 +21,7 @@ requirements:
     - cmake
     - make
     - {{ compiler('c') }}
+  host:
     - gklib
   run:
     - gklib
